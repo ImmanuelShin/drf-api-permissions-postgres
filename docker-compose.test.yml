@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  test_web:
+    build:
+      context: .
+    command: python manage.py test integers
+    volumes:
+      - .:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=integers_api_project.settings_test
+    depends_on:
+      - test_db
+
+  test_db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=test_db
+      - POSTGRES_USER=test_user
+      - POSTGRES_PASSWORD=test_password
