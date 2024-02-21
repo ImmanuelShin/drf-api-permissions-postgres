@@ -59,3 +59,7 @@ If you want to stop and remove the Docker containers, run the following command:
 ```bash
 docker-compose down
 ```
+
+### Tests
+
+To run tests, run ```docker-compose -f docker-compose.test.yml up --build```
