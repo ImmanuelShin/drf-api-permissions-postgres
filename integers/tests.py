@@ -11,10 +11,8 @@ class IntegerTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.superuser = get_user_model().objects.create_superuser(
-            username='admin1', password='poptart123', email='admin1@admin.com'
+            username='admin1', password='pass123', email='admin1@admin.com'
         )
-        cls.token, created = Token.objects.get_or_create(user=cls.superuser)
-        print(f'Token key: {cls.token.key}')
 
         test_integer = Integer.objects.create(
             name="10",
@@ -24,7 +22,7 @@ class IntegerTests(APITestCase):
         test_integer.save()
 
     def setUp(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
+        self.client.login(username='admin1', password='pass123')
 
     def test_Integer_model(self):
         thing = Integer.objects.get(id=1)
